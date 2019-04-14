@@ -1,8 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\components"
+    "\\blockstack"
   ],
-  "SelectedNode": "\\components\\scanner.js",
+  "SelectedNode": "\\blockstack\\authenticator.js",
   "PreviewInSolutionExplorer": false
 }

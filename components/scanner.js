@@ -17,44 +17,43 @@ export default class Scanner extends React.Component {
     render() {
       return (
           <View style={{ flex: 1 }}>
-                  {this.state.hasCameraPermission &&
+          {this.state.hasCameraPermission &&
             <Camera style={{ flex: 1 }} type={this.state.type}>
-\                style={{
-                  flex: 1,
-                  backgroundColor: 'transparent',
-                  flexDirection: 'row',
-                }}>
+              style={{
+                flex: 1,
+                backgroundColor: 'transparent',
+                flexDirection: 'row',
+              }}>
                 <TouchableOpacity
-                  style={{
-                    flex: 0.1,
-                    alignSelf: 'flex-end',
-                    alignItems: 'center',
-                  }}
-                  onPress={() => {
-                    this.props.menu()
-                    }
-                  }>
-                          <Text style={{ fontSize: 18, marginBottom: 10, color: 'white', width: 50, backgroundColor: '#000' }}>
-                    {' '}Menu{' '}
-                  </Text>
-               </TouchableOpacity>
-                <TouchableOpacity
-                    style={{
-                        flex: 0.1,
-                        alignSelf: 'flex-end',
-                        alignItems: 'center',
-                    }}
-                    onPress={() => {
-                        this.props.scan()
-                    }
-                          }>
-                          <Text style={{ fontSize: 18, marginBottom: 10, color: 'white', width: 50, backgroundColor: '#000' }}>
-                        {' '}Scan{' '}
-                    </Text>
-                </TouchableOpacity>
-
-              </View>
+                style={{
+                  flex: 0.1,
+                  alignSelf: 'flex-end',
+                  alignItems: 'center',
+                }}
+                onPress={() => {
+                  this.props.menu()
+                }
+                }>
+                <Text style={{ fontSize: 18, marginBottom: 10, color: 'white', width: 50, backgroundColor: '#000' }}>
+                  {' '}Menu{' '}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  flex: 0.1,
+                  alignSelf: 'flex-end',
+                  alignItems: 'center',
+                }}
+                onPress={() => {
+                  this.props.scan()
+                }
+                }>
+                <Text style={{ fontSize: 18, marginBottom: 10, color: 'white', width: 50, backgroundColor: '#000' }}>
+                  {' '}Scan{' '}
+                </Text>
+              </TouchableOpacity>
             </Camera>
+            
           }
           </View>
       );
