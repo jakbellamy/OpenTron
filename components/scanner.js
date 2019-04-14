@@ -6,6 +6,9 @@ const postRequest = (e, photo) => {
   e.preventDefault()
   console.log('hit')
   fetch(`https://opentron.appspot.com/query`, {
+
+
+
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -39,8 +42,6 @@ export default class Scanner extends React.Component {
       };
     }
 
-
-
     render() {
       const { hasCameraPermission } = this.state;
       if (hasCameraPermission === null) {
@@ -63,10 +64,22 @@ export default class Scanner extends React.Component {
                     alignSelf: 'flex-end',
                     alignItems: 'center',
                   }}
+                  onPress={() => {this.props.menu()}}>
+                  <Text
+                    style={{ fontSize: 26, marginBottom: 10, color: 'white' }}>
+                    ⏎
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{
+                    flex: 0.8,
+                    alignSelf: 'flex-end',
+                    alignItems: 'center',
+                  }}
                   onPress={(e) => {this.snap(e)}}>
                   <Text
-                    style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
-                    Capture
+                    style={{ fontSize: 16, marginBottom: 10, color: 'white' }}>
+                    SNAP
                   </Text>
                 </TouchableOpacity>
               </View>
