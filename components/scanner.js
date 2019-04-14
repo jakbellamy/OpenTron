@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import { Camera, Permissions } from 'expo';
 
-export default class App extends React.Component {
+export default class Scanner extends React.Component {
   
     state = {
       hasCameraPermission: null,
@@ -16,9 +16,8 @@ export default class App extends React.Component {
   
     render() {
       return (
-        <>
           <View style={{ flex: 1 }}>
-          { this.state.hasCameraPermission &&
+                  {this.state.hasCameraPermission &&
             <Camera style={{ flex: 1 }} type={this.state.type}>
               <View
                 style={{
@@ -33,21 +32,32 @@ export default class App extends React.Component {
                     alignItems: 'center',
                   }}
                   onPress={() => {
-                    this.setState({
-                      type: this.state.type === Camera.Constants.Type.back
-                        ? Camera.Constants.Type.front
-                        : Camera.Constants.Type.back,
-                    });
-                  }}>
-                  <Text style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
-                    {' '}Flip{' '}
+                    this.props.menu()
+                    }
+                  }>
+                          <Text style={{ fontSize: 18, marginBottom: 10, color: 'white', width: 50, backgroundColor: '#000' }}>
+                    {' '}Menu{' '}
                   </Text>
+               </TouchableOpacity>
+                <TouchableOpacity
+                    style={{
+                        flex: 0.1,
+                        alignSelf: 'flex-end',
+                        alignItems: 'center',
+                    }}
+                    onPress={() => {
+                        this.props.scan()
+                    }
+                          }>
+                          <Text style={{ fontSize: 18, marginBottom: 10, color: 'white', width: 50, backgroundColor: '#000' }}>
+                        {' '}Scan{' '}
+                    </Text>
                 </TouchableOpacity>
+
               </View>
             </Camera>
           }
           </View>
-        </>
       );
     }
   }
