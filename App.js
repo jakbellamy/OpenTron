@@ -1,42 +1,55 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import { Permissions } from 'expo';
-import Login from './components/login';
-import Menu from './components/menu';
-import Scanner from './components/scanner'
+import { Camera, Permissions } from 'expo';
 
 export default class App extends React.Component {
+  
+  state = {
+    hasCameraPermission: null,
+    type: Camera.Constants.Type.back,
+  }
 
-    state = {
-        view: 'menu'
-    }
+  async componentDidMount() {
+    const permission = await Permissions.askAsync(Permissions.CAMERA);
+    this.setState({ hasCameraPermission: permission.status === 'granted' });
+  }
 
-    switchLogin = () => {this.setState({view: 'login'})}
-    switchMenu = () => { this.setState({view: 'menu'})}
-    switchCamera = () => { this.setState({view: 'camera'})}
-
-    render() {
-        return (
-            <>
-                <Text
-                    onPress={() => this.switchMenu()}
-                    style={{ color: 'black', position: 'absolute', top: '20%', left: '20%' }}
-                >Menu</Text>
-                {(() => {
-                    switch (this.state.view) {
-                        case 'login':
-                            return <Login />
-                        case 'menu':
-                            return <Menu login={this.switchLogin} camera={this.switchCamera}/>
-                        case 'camera': {
-                            return <Scanner menu={this.switchMenu}/>
-                        }
-                    }
-                })()}
-            </>
-
-        );
-    }
+  render() {
+    return (
+      <>
+        <View style={{ flex: 1 }}>
+        { this.state.hasCameraPermission &&
+          <Camera style={{ flex: 1 }} type={this.state.type}>
+            <View
+              style={{
+                flex: 1,
+                backgroundColor: 'transparent',
+                flexDirection: 'row',
+              }}>
+              <TouchableOpacity
+                style={{
+                  flex: 0.1,
+                  alignSelf: 'flex-end',
+                  alignItems: 'center',
+                }}
+                onPress={() => {
+                  this.setState({
+                    type: this.state.type === Camera.Constants.Type.back
+                      ? Camera.Constants.Type.front
+                      : Camera.Constants.Type.back,
+                  });
+                }}>
+                <Text style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
+                  {' '}Flip{' '}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </Camera>
+        }
+        </View>
+      </>
+    );
+  }
 }
 
 const styles = StyleSheet.create({

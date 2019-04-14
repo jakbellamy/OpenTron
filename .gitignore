@@ -5,6 +5,6 @@ npm-debug.*
 *.p12
 *.key
 *.mobileprovision
-.vs/
+
 /node_modules
 /keys
