@@ -1,8 +1,7 @@
-import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import { Permissions } from 'expo';
-import Login from './components/login';
-import Menu from './components/menu';
+import React from 'react'
+import { StyleSheet, Text, View, TouchableOpacity} from 'react-native'
+import Login from './components/login'
+import Menu from './components/menu'
 import Scanner from './components/scanner'
 
 export default class App extends React.Component {
@@ -13,7 +12,7 @@ export default class App extends React.Component {
 
     switchLogin = () => {this.setState({view: 'login'})}
     switchMenu = () => { this.setState({view: 'menu'})}
-    switchCamera = () => { this.setState({view: 'camera'})}
+    switchCamera = () => { this.setState({view: 'scanner'})}
 
     render() {
         return (
@@ -28,14 +27,14 @@ export default class App extends React.Component {
                             return <Login />
                         case 'menu':
                             return <Menu login={this.switchLogin} camera={this.switchCamera}/>
-                        case 'camera': {
+                        case 'scanner': {
                             return <Scanner menu={this.switchMenu}/>
                         }
                     }
                 })()}
             </>
 
-        );
+        )
     }
 }
 
@@ -46,4 +45,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
+})

@@ -27,7 +27,7 @@ export default class Scanner extends React.Component {
                 }}>
                 <TouchableOpacity
                   style={{
-                    flex: 0.1,
+                    flex: 0.2,
                     alignSelf: 'flex-end',
                     alignItems: 'center',
                   }}
@@ -41,7 +41,7 @@ export default class Scanner extends React.Component {
                </TouchableOpacity>
                 <TouchableOpacity
                     style={{
-                        flex: 0.1,
+                        flex: 1.2,
                         alignSelf: 'flex-end',
                         alignItems: 'center',
                     }}
