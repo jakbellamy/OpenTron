@@ -1,57 +1,25 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import { Camera, Permissions, ImagePicker } from 'expo';
-
-const postRequest = (e, photo) => {
-  e.preventDefault()
-  console.log('hit')
-  fetch(`https://opentron.appspot.com/query`, {
-
-
-
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      image: photo,
-      name: 'test.jpg'
-    })
-  })
-  .then(res => res.text())
-  .then(res => console.log("res: " + res))
-  .catch(err => console.log("error: " + err))
-}
+import { Camera, Permissions } from 'expo';
 
 export default class Scanner extends React.Component {
+  
     state = {
       hasCameraPermission: null,
       type: Camera.Constants.Type.back,
-      photo: ''
     }
   
-    async componentDidMount() {
-      const permission = await Permissions.askAsync(Permissions.CAMERA);
-      this.setState({ hasCameraPermission: permission.status === 'granted' });
-    }
-
-    snap = async (e) => {
-      if (this.camera) {
-        let photo = await this.camera.takePictureAsync(options={base64: true, quality: 0.2});
-        postRequest(e, photo.base64)
-      };
-    }
-
+    // async componentDidMount() {
+    //   const permission = await Permissions.askAsync(Permissions.CAMERA);
+    //   this.setState({ hasCameraPermission: permission.status === 'granted' });
+    // }
+  
     render() {
-      const { hasCameraPermission } = this.state;
-      if (hasCameraPermission === null) {
-        return <View />;
-      } else if (hasCameraPermission === false) {
-        return <Text>No access to camera</Text>;
-      } else {
-        return (
+      return (
+        <>
           <View style={{ flex: 1 }}>
-            <Camera ref={ref => {this.camera = ref}}style={{ flex: 1 }} type={this.state.type}>
+          { this.state.hasCameraPermission &&
+            <Camera style={{ flex: 1 }} type={this.state.type}>
               <View
                 style={{
                   flex: 1,
@@ -64,28 +32,22 @@ export default class Scanner extends React.Component {
                     alignSelf: 'flex-end',
                     alignItems: 'center',
                   }}
-                  onPress={() => {this.props.menu()}}>
-                  <Text
-                    style={{ fontSize: 26, marginBottom: 10, color: 'white' }}>
-                    ⏎
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={{
-                    flex: 0.8,
-                    alignSelf: 'flex-end',
-                    alignItems: 'center',
-                  }}
-                  onPress={(e) => {this.snap(e)}}>
-                  <Text
-                    style={{ fontSize: 16, marginBottom: 10, color: 'white' }}>
-                    SNAP
+                  onPress={() => {
+                    this.setState({
+                      type: this.state.type === Camera.Constants.Type.back
+                        ? Camera.Constants.Type.front
+                        : Camera.Constants.Type.back,
+                    });
+                  }}>
+                  <Text style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
+                    {' '}LOOK{' '}
                   </Text>
                 </TouchableOpacity>
               </View>
             </Camera>
+          }
           </View>
-        );
-      }
+        </>
+      );
     }
   }
