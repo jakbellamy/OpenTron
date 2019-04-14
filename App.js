@@ -2,14 +2,15 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import { Camera, Permissions } from 'expo';
 import Login from './components/login';
+import Menu from './components/menu';
 
 export default class App extends React.Component {
 
     state = {
-        hasCameraPermission: null,
-        type: Camera.Constants.Type.back,
+        view: 'menu'
     }
 
+    switchLogin = () => { this.setState({view: 'login'})}
     async componentDidMount() {
         const permission = await Permissions.askAsync(Permissions.CAMERA);
         this.setState({ hasCameraPermission: permission.status === 'granted' });
@@ -17,7 +18,17 @@ export default class App extends React.Component {
 
     render() {
         return (
-            <Login />
+            <>
+                {(() => {
+                    switch (this.state.view) {
+                        case 'login':
+                            return <Login />
+                        case 'menu':
+                            return <Menu login={this.switchLogin}/>
+                    }
+                })()}
+            </>
+
         );
     }
 }
