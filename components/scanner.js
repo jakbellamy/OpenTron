@@ -19,8 +19,7 @@ export default class Scanner extends React.Component {
           <View style={{ flex: 1 }}>
                   {this.state.hasCameraPermission &&
             <Camera style={{ flex: 1 }} type={this.state.type}>
-              <View
-                style={{
+\                style={{
                   flex: 1,
                   backgroundColor: 'transparent',
                   flexDirection: 'row',
