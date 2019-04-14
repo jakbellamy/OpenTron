@@ -2,17 +2,17 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import { Camera, Permissions } from 'expo';
 
-export default class App extends React.Component {
+export default class Scanner extends React.Component {
   
     state = {
       hasCameraPermission: null,
       type: Camera.Constants.Type.back,
     }
   
-    async componentDidMount() {
-      const permission = await Permissions.askAsync(Permissions.CAMERA);
-      this.setState({ hasCameraPermission: permission.status === 'granted' });
-    }
+    // async componentDidMount() {
+    //   const permission = await Permissions.askAsync(Permissions.CAMERA);
+    //   this.setState({ hasCameraPermission: permission.status === 'granted' });
+    // }
   
     render() {
       return (
@@ -40,7 +40,7 @@ export default class App extends React.Component {
                     });
                   }}>
                   <Text style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
-                    {' '}Flip{' '}
+                    {' '}LOOK{' '}
                   </Text>
                 </TouchableOpacity>
               </View>
