@@ -1,5 +1,5 @@
 import React from 'react'
-import { Content, Text, CardItem, Right, Card, Icon } from 'native-base';
+import { Content, Text, CardItem, Right, Card, Icon, Button } from 'native-base';
 
 export default class ClassCardContainer extends React.Component {
   render() {
@@ -13,8 +13,17 @@ export default class ClassCardContainer extends React.Component {
               <Right>
                 <Icon active name="arrow-forward" />
               </Right>
-            </CardItem>  
+            </CardItem>
           </Card>})}
+
+          <Card>
+            <CardItem style={{flex: .8, alignItems: 'center', justifyContent: 'center'}}>
+              <Button small transparent>
+                <Icon name="add" />
+              </Button> 
+            </CardItem>
+          </Card>
+
       </Content>
     )
   }
