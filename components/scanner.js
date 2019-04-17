@@ -1,14 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import { StyleSheet, View, TouchableOpacity} from 'react-native';
 import { Camera, Permissions, ImagePicker } from 'expo';
+import {Container, Header, Left, Body, Right, Button, Icon, Text, Content, Footer } from 'native-base'
 
 const postRequest = (e, photo) => {
   e.preventDefault()
   console.log('hit')
   fetch(`https://opentron.appspot.com/query`, {
-
-
-
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -50,39 +48,30 @@ export default class Scanner extends React.Component {
         return <Text>No access to camera</Text>;
       } else {
         return (
-          <View style={{ flex: 1 }}>
+          
+          <View style={{ flex: 1}} >
             <Camera ref={ref => {this.camera = ref}}style={{ flex: 1 }} type={this.state.type}>
-              <View
-                style={{
-                  flex: 1,
-                  backgroundColor: 'transparent',
-                  flexDirection: 'row',
-                }}>
-                <TouchableOpacity
-                  style={{
-                    flex: 0.1,
-                    alignSelf: 'flex-end',
-                    alignItems: 'center',
-                  }}
-                  onPress={() => {this.props.menu()}}>
-                  <Text
-                    style={{ fontSize: 26, marginBottom: 10, color: 'white' }}>
-                    ⏎
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={{
-                    flex: 0.8,
-                    alignSelf: 'flex-end',
-                    alignItems: 'center',
-                  }}
-                  onPress={(e) => {this.snap(e)}}>
-                  <Text
-                    style={{ fontSize: 16, marginBottom: 10, color: 'white' }}>
-                    SNAP
-                  </Text>
-                </TouchableOpacity>
-              </View>
+              <Content padder style={{position: 'absolute'}}>
+                <Left>
+                  <Button bordered transparent onPress={() => this.props.selectView('menu')}>
+                    <Icon name='menu' />
+                  </Button>
+                </Left>
+              </Content>
+
+              <Content padder style={{position: 'absolute', left: '80%'}}>
+               <Right >
+                  <Button bordered transparent onPress={() => console.log('add flash')}>
+                    <Icon name='flash' />
+                  </Button>
+                </Right>
+              </Content>
+
+              <Content style={{position: 'absolute', top: '86%', left: '43%'}}>
+                <Button block large rounded bordered transparent onPress={(e) => {this.snap(e)}}>
+                  <Icon large name='aperture'/>
+                </Button>
+              </Content>
             </Camera>
           </View>
         );

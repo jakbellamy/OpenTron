@@ -22,7 +22,7 @@ export default class Login extends React.Component
                 Please Login
             </Text>
             <Text style={{ color: 'black', position: 'absolute', top: '45%', left: '40%' }}>
-                    Username:
+                Username:
             </Text>
 
             <TextInput

@@ -3,36 +3,49 @@ import { StyleSheet, Text, View, TouchableOpacity} from 'react-native'
 import Login from './components/login'
 import Menu from './components/menu'
 import Scanner from './components/scanner'
+import Navbar from './components/navbar';
+import { Container } from 'native-base';
 
 export default class App extends React.Component {
 
     state = {
-        view: 'menu'
+        view: 'menu',
+        loggedIn: true,
+        keys: [],
+        classes: []
     }
 
-    switchLogin = () => {this.setState({view: 'login'})}
-    switchMenu = () => { this.setState({view: 'menu'})}
-    switchCamera = () => { this.setState({view: 'scanner'})}
+    logFlip = () => {
+        if(this.state.loggedIn){
+            this.setState({loggedIn: false, view: 'login'})
+        }else{
+            this.setState({loggedIn: true, view: 'menu'})
+        } 
+    }
+    selectView = (selected) => {this.setState({view: selected})}
 
     render() {
         return (
-            <>
-                <Text
-                    onPress={() => this.switchMenu()}
-                    style={{ color: 'black', position: 'absolute', top: '20%', left: '20%' }}
-                >Menu</Text>
+            <Container>
+              {this.state.view != 'scanner' ?
+                <Navbar selectView={this.selectView} view={this.state.view}/>
+                :
+                null
+              }  
+            
                 {(() => {
                     switch (this.state.view) {
                         case 'login':
                             return <Login />
                         case 'menu':
-                            return <Menu login={this.switchLogin} camera={this.switchCamera}/>
+                            return <Menu keys={this.state.keys} classes={this.state.classes}/>
                         case 'scanner': {
-                            return <Scanner menu={this.switchMenu}/>
+                            return <Scanner selectView={this.selectView}/>
                         }
                     }
                 })()}
-            </>
+
+            </Container>
 
         )
     }

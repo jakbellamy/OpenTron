@@ -1,38 +1,38 @@
 // JavaScript source code
 import React from 'react';
-import { StyleSheet, TextAppRegistry, Text, TextInput, View } from 'react-native';
+import {Content, List, ListItem, Text, Button, Icon, Picker } from 'native-base';
 
+let show = 'default'
 
 export default class Menu extends React.Component{
 
+    state = {
+        selected: false
+    }
+
+    selectItem = (item) => {this.setState({selected: item})}
+    deselectItem = () => {this.setState({selected: false})}
 
     render() {
         return (
-            <>
-                <Text
-                    style={{ color: 'black', position: 'absolute', top: '30%', left: '40%' }}
-                    onPress={() => this.props.login()}
-                >
-                   Login
-                </Text>
+            <Content>
+            <List>
+              <ListItem onPress={!this.state.selected ? () => this.selectItem('class') : this.deselectItem}>
+              {this.state.selected == 'class' ? <Icon name="arrow-up"/> : <Icon name="arrow-down"/>}
+                <Text style={{position: 'absolute', left: '40%'}}>Set Class</Text>
+              </ListItem>
 
-                <Text style={{ color: 'black', position: 'absolute', top: '40%', left: '40%' }}
-                    onClick={() => { }}>
-                    Submit Keys
-                </Text>
+              <ListItem onPress={!this.state.selected ? () => this.selectItem('key') : this.deselectItem}>
+                {this.state.selected == 'key' ? <Icon name="arrow-up"/> : <Icon name="arrow-down"/>}
+                <Text style={{position: 'absolute', left: '40%'}}>Set Key</Text>
+              </ListItem>
 
-                <Text style={{ color: 'black', position: 'absolute', top: '50%', left: '40%' }}>
-                    Grade Tests
-                </Text>
-
-                <Text
-                    style={{ color: 'black', position: 'absolute', top: '60%', left: '40%' }}
-                    onPress={() => this.props.camera()}
-                >
-                    Camera
-                </Text>
-                
-            </>
+              <ListItem onPress={!this.state.selected ? () => this.selectItem('about') : this.deselectItem}>
+              {this.state.selected == 'about' ? <Icon name="arrow-up"/> : <Icon name="arrow-down"/>}
+                <Text style={{position: 'absolute', left: '40%'}}>About</Text>
+              </ListItem>
+            </List>
+          </Content>
         )
     }
 }
