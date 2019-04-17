@@ -11,7 +11,7 @@ export default class Navbar extends React.Component {
             </Button>
           </Left>
           <Body>
-            <Title color="blue">OPENTRON</Title>
+            <Title color="blue">OpenTron</Title>
           </Body>
           <Right>
             <Button transparent onPress={() => this.props.selectView('scanner')}>

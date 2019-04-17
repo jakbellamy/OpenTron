@@ -25,7 +25,9 @@ export default class Scanner extends React.Component {
     state = {
       hasCameraPermission: null,
       type: Camera.Constants.Type.back,
-      photo: ''
+      photo: '',
+      selectedClass: null,
+      selectedTest: null
     }
   
     async componentDidMount() {

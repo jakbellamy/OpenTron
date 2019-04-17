@@ -11,8 +11,8 @@ export default class App extends React.Component {
     state = {
         view: 'menu',
         loggedIn: true,
-        keys: [],
-        classes: []
+        keys: ['Math August', 'Science Friday'],
+        periods: [{name: 'First Period'}, {name: 'Third Period'}, {name: 'Fourth Period'}, {name: 'Home Room'}]
     }
 
     logFlip = () => {
@@ -38,7 +38,7 @@ export default class App extends React.Component {
                         case 'login':
                             return <Login />
                         case 'menu':
-                            return <Menu keys={this.state.keys} classes={this.state.classes}/>
+                            return <Menu keys={this.state.keys} periods={this.state.periods}/>
                         case 'scanner': {
                             return <Scanner selectView={this.selectView}/>
                         }
