@@ -6,9 +6,9 @@ export default class Keys extends React.Component {
     return (
       <Content>
         {this.props.keys.map(function(key) {
-          return <Card>
+          return <Card key={key._id}>
             <CardItem>
-              <Text>{key}</Text>
+              <Text>{key.test}</Text>
               <Right>
                 <Icon active name="arrow-forward" />
               </Right>
