@@ -4,16 +4,14 @@ import { Camera, Permissions, ImagePicker } from 'expo';
 import {Container, Header, Left, Body, Right, Button, Icon, Text, Content, Footer } from 'native-base'
 
 const postRequest = (e, photo) => {
-  e.preventDefault()
   console.log('hit')
-  fetch(`https://opentron.appspot.com/query`, {
+  fetch(`http://192.168.0.28:5000/scantrons`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      image: photo,
-      name: 'test.jpg'
+      img: photo
     })
   })
   .then(res => res.text())
@@ -37,7 +35,7 @@ export default class Scanner extends React.Component {
 
     snap = async (e) => {
       if (this.camera) {
-        let photo = await this.camera.takePictureAsync(options={base64: true, quality: 0.2});
+        let photo = await this.camera.takePictureAsync(options={base64: true, quality: 0.1});
         postRequest(e, photo.base64)
       };
     }
@@ -70,7 +68,7 @@ export default class Scanner extends React.Component {
               </Content>
 
               <Content style={{position: 'absolute', top: '86%', left: '43%'}}>
-                <Button block large rounded bordered transparent onPress={(e) => {this.snap(e)}}>
+                <Button block large rounded bordered transparent onPress={() => {this.snap()}}>
                   <Icon large name='aperture'/>
                 </Button>
               </Content>
