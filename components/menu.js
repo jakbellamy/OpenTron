@@ -1,7 +1,7 @@
 // JavaScript source code
 import React from 'react';
 import {Content, List, ListItem, Text, Button, Icon, Picker } from 'native-base';
-import ClassCardContainer from './classes';
+import Classrooms from './classrooms';
 import Keys from './keys';
 import About from './about';
 
@@ -24,7 +24,7 @@ export default class Menu extends React.Component{
               </ListItem>
 
               {this.state.selected == 'class' ? 
-              <ClassCardContainer periods={this.props.periods}/> 
+              <Classrooms classrooms={this.props.classrooms} key={1}/> 
               : null}
 
               <ListItem onPress={!this.state.selected ? () => this.selectItem('key') : this.deselectItem}>
