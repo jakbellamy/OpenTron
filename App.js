@@ -11,8 +11,27 @@ export default class App extends React.Component {
     state = {
         view: 'menu',
         loggedIn: true,
-        keys: ['Math August', 'Science Friday'],
-        periods: [{name: 'First Period'}, {name: 'Third Period'}, {name: 'Fourth Period'}, {name: 'Home Room'}]
+        keys: [],
+        classrooms: []
+    }
+
+    fetchKeys = () => {
+        fetch('http://192.168.0.28:5000/keys')
+        .then(res => res.json())
+        .then(keys => this.setState({keys}))
+        .catch(err => console.log('error fetching keys: ' + err))
+    }    
+    fetchClassrooms = () => {
+        fetch('http://192.168.0.28:5000/classrooms')
+        .then(res => res.json())
+        .then(classrooms => this.setState({classrooms}))
+        .catch(err => console.log('error fetching keys: ' + err))
+    }    
+
+    componentDidMount(){
+        this.fetchKeys()
+        this.fetchClassrooms()
+        console.log(this.state.classrooms)
     }
 
     logFlip = () => {
@@ -38,7 +57,7 @@ export default class App extends React.Component {
                         case 'login':
                             return <Login />
                         case 'menu':
-                            return <Menu keys={this.state.keys} periods={this.state.periods}/>
+                            return <Menu keys={this.state.keys} classrooms={this.state.classrooms}/>
                         case 'scanner': {
                             return <Scanner selectView={this.selectView}/>
                         }
