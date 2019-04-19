@@ -1,15 +1,14 @@
 import React from 'react'
 import { Content, Text, CardItem, Right, Card, Icon, Button } from 'native-base';
 
-export default class ClassCardContainer extends React.Component {
+export default class Classrooms extends React.Component {
   render() {
-    console.log(this.props.periods)
     return (
       <Content>
-        {this.props.periods.map(function(period) {
-          return <Card>
+        {this.props.classrooms.map(function(classroom) {
+          return <Card key={classroom._id}>
             <CardItem>
-              <Text>{period.name}</Text>
+              <Text>{classroom.className}</Text>
               <Right>
                 <Icon active name="arrow-forward" />
               </Right>
